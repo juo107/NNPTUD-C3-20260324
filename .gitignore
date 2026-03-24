@@ -59,3 +59,10 @@ typings/
 
 # next.js build output
 .next
+
+# Project specific
+uploads/
+*.xlsx
+inspect_excel.js
+find_role.js
+test_import.js

@@ -2,24 +2,27 @@ const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
     host: "sandbox.smtp.mailtrap.io",
-    port: 25,
-    secure: false, // Use true for port 465, false for port 587
+    port: 2525,
     auth: {
-        user: "",
-        pass: "",
-    },
+        user: "f52d396b7c4943",
+        pass: "dc39e3b6ae8599"
+    }
 });
 
 module.exports = {
-    sendMail: async function (to, url) {
-        await transporter.sendMail({
-            from: 'admin@haha.com',
-            to: to,
-            subject: "reset password email",
-            text: "click vao day de doi pass", // Plain-text version of the message
-            html: "click vao <a href=" + url+ ">day</a> de doi pass", // HTML version of the message
-        })
+    sendMail: async function (to, subject, text, html) {
+        try {
+            await transporter.sendMail({
+                from: '"Admin" <admin@haha.com>',
+                to: to,
+                subject: subject,
+                text: text,
+                html: html
+            });
+            console.log(`Email sent to: ${to}`);
+        } catch (error) {
+            console.error(`Failed to send email to ${to}:`, error);
+            throw error;
+        }
     }
 }
-
-// Send an email using async/await
